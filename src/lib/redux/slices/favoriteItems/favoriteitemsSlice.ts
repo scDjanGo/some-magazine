@@ -22,11 +22,19 @@ export const fetchFavoriteItems = createAsyncThunk<Item[], void, { state: RootSt
             const data = await response.json();
             setLoading(true)
             return data;
-        } catch (error : any ) {
-            const message = error.message || "Something went wrong";
+        } catch (error: unknown) {
+            let message;
+
+            if (error instanceof Error) {
+                message = error.message;
+            } else {
+                message = "Something went wrong";
+            }
+
             return rejectWithValue(message);
         }
     }
+
 );
 
 const favoriteItems = createSlice({

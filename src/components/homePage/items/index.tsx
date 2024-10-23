@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { fetchItemsSlice, setInitialItems } from "@/lib/redux/slices/itemsSlice/itemsSlice";
+import { setInitialItems } from "@/lib/redux/slices/itemsSlice/itemsSlice";
 import { Item } from "@/lib/redux/types/types";
 import Loading from "@/components/UI/Loading";
 import Cards from "../cards";

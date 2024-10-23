@@ -9,8 +9,6 @@ import { Item } from "@/lib/redux/types/types";
 import Loading from "@/components/UI/Loading";
 import Image from "next/image";
 import Link from "next/link";
-import FavoriteButton from "@/components/UI/favoriteButton";
-import { setFavorite, removeFavorite } from "@/lib/redux/slices/favorite/favorite";
 
 import FavoriteItems from "@/components/favoriteItems";
 

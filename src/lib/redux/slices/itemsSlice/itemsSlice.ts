@@ -11,21 +11,28 @@ const initialState: ItemsState = {
 };
 
 export const fetchItemsSlice = createAsyncThunk<Item[], void, { state: RootState; rejectValue: string }>(
-    "items/fetchItemsSlice",
-    async (_, { rejectWithValue }) => {
+    "items/fetchItemsSlice", async (_, { rejectWithValue }) => {
         try {
             const response = await fetch('https://fakestoreapi.com/products?limit=6');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            setLoading(true)
+            setLoading(true);
             return data;
-        } catch (error : any ) {
-            const message = error.message || "Something went wrong";
+        } catch (error: unknown) {
+            let message;
+
+            if (error instanceof Error) {
+                message = error.message;
+            } else {
+                message = "Something went wrong";
+            }
+
             return rejectWithValue(message);
         }
     }
+
 );
 
 const itemsSlice = createSlice({

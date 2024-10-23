@@ -10,8 +10,7 @@ const initialState: ItemState = {
 };
 
 export const fetchProductId = createAsyncThunk<Item, string, { state: RootState; rejectValue: string }>(
-    "items/fetchItemById",
-    async (id: string, { rejectWithValue }) => {
+    "items/fetchItemById", async (id: string, { rejectWithValue }) => {
         try {
             const response = await fetch(`https://fakestoreapi.com/products/${id}`);
             if (!response.ok) {
@@ -19,11 +18,19 @@ export const fetchProductId = createAsyncThunk<Item, string, { state: RootState;
             }
             const data = await response.json();
             return data;
-        } catch (error: any) {
-            const message = error.message || "Something went wrong";
+        } catch (error: unknown) {
+            let message: string;
+
+            if (error instanceof Error) {
+                message = error.message;
+            } else {
+                message = "Something went wrong";
+            }
+
             return rejectWithValue(message);
         }
     }
+
 );
 
 const productSlice = createSlice({
