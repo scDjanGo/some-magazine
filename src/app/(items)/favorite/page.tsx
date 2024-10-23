@@ -42,7 +42,7 @@ export default function Page() {
                 dispatch(setReduxFavoriteItems(res));
             }
         }
-    }, [items, dispatch,]);
+    }, [items, dispatch, favorite]);
 
 
 
